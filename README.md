@@ -1,4 +1,4 @@
-Project Report: Hospital Operations & Revenue Risk Intelligence Platform
+** Project Report: Hospital Operations & Revenue Risk Intelligence Platform
 Executive Summary
 This project outlines the development of an end-to-end analytics and machine learning ecosystem designed for modern healthcare environments. The platform addresses clinical bottlenecks by predicting patient risk levels and mitigates financial losses by forecasting insurance claim rejections. By integrating disparate data sources, the system provides a unified interface for operational efficiency and revenue stability.
 
