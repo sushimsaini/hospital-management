@@ -1,0 +1,31 @@
+{
+  "risk": {
+    "target": "risk_score",
+    "features": [
+      "department",
+      "visit_type",
+      "length_of_stay_hours",
+      "city",
+      "gender",
+      "insurance_provider",
+      "visit_frequency",
+      "avg_length_of_stay_patient"
+    ]
+  },
+  "claim": {
+    "target": "claim_status",
+    "features": [
+      "department",
+      "billed_amount",
+      "approved_amount",
+      "insurance_provider",
+      "payment_days",
+      "visit_type",
+      "length_of_stay_hours",
+      "city",
+      "gender",
+      "revenue_realization_ratio",
+      "provider_rejection_rate"
+    ]
+  }
+}

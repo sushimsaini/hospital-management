@@ -1,0 +1,42 @@
+# Model A: Visit Risk Classification
+**Purpose:** Predict if a hospital visit is Low, Medium, or High risk to assist in operational triage.
+
+import pandas as pd
+import joblib
+from sklearn.preprocessing import StandardScaler, LabelEncoder
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import classification_report, confusion_matrix
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# 1. Load Data
+df = pd.read_csv('model_table.csv').sort_values('visit_date')
+
+# 2. Feature Selection & Encoding
+risk_features = ['age', 'gender', 'chronic_flag', 'department', 'visit_type', 
+                 'length_of_stay_hours', 'visit_frequency', 'avg_los_per_patient']
+X = df[risk_features].copy()
+y = df['risk_score']
+
+# Encode Categorical
+le = LabelEncoder()
+X['gender'] = le.fit_transform(X['gender'])
+X = pd.get_dummies(X, columns=['department', 'visit_type'])
+
+# 3. Time-based Split (80/20)
+split_idx = int(len(X) * 0.8)
+X_train, X_test = X.iloc[:split_idx], X.iloc[split_idx:]
+y_train, y_test = y.iloc[:split_idx], y.iloc[split_idx:]
+
+# 4. Train Model
+rf_model = RandomForestClassifier(n_estimators=100, random_state=42)
+rf_model.fit(X_train, y_train)
+
+# 5. Evaluate
+y_pred = rf_model.predict(X_test)
+print("Visit Risk Classification Report:")
+print(classification_report(y_test, y_pred))
+
+# Save Artifact
+joblib.dump(rf_model, 'visit_risk_model.pkl')
+
